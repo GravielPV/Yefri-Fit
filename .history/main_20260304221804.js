@@ -80,7 +80,16 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelectorAll(".hero-stats")
     .forEach((el) => statsObserver.observe(el));
 
-  /* ── Contact form handler removed (no form) ─────────────── */
+  /* ── Contact form: show toast on submit ───────────────── */
+  const contactForm = document.getElementById("contactForm");
+  const toast = document.getElementById("toast");
+
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3500);
+    this.reset();
+  });
 
   /* ── Navbar: highlight active section link ────────────── */
   const sections = document.querySelectorAll("section[id]");

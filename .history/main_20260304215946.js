@@ -21,6 +21,18 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", () => navLinks.classList.remove("open"));
   });
 
+  /* ── FAQ accordion ────────────────────────────────────── */
+  document.querySelectorAll(".faq-q").forEach((q) => {
+    q.addEventListener("click", () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains("open");
+      document
+        .querySelectorAll(".faq-item")
+        .forEach((i) => i.classList.remove("open"));
+      if (!wasOpen) item.classList.add("open");
+    });
+  });
+
   /* ── Scroll-reveal animation ──────────────────────────── */
   const revealObserver = new IntersectionObserver(
     (entries) => {
@@ -37,8 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const revealSelectors = [
     ".service-card",
     ".price-card",
+    ".step-card",
     ".testimonial-card",
+    ".cert-item",
     ".contact-item",
+    ".g-item",
   ];
 
   document.querySelectorAll(revealSelectors.join(", ")).forEach((el) => {
@@ -50,13 +65,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ── Animated number counter ──────────────────────────── */
   function animateCounter(el, target) {
-    const suffix = el.querySelector(".suffix");
-    const suffixHTML = suffix ? suffix.outerHTML : "";
     let current = 0;
     const step = Math.ceil(target / 60);
     const timer = setInterval(() => {
       current = Math.min(current + step, target);
-      el.innerHTML = current + suffixHTML;
+      el.textContent = current;
       if (current >= target) clearInterval(timer);
     }, 25);
   }
@@ -80,7 +93,16 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelectorAll(".hero-stats")
     .forEach((el) => statsObserver.observe(el));
 
-  /* ── Contact form handler removed (no form) ─────────────── */
+  /* ── Contact form: show toast on submit ───────────────── */
+  const contactForm = document.getElementById("contactForm");
+  const toast = document.getElementById("toast");
+
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3500);
+    this.reset();
+  });
 
   /* ── Navbar: highlight active section link ────────────── */
   const sections = document.querySelectorAll("section[id]");
