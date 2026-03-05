@@ -1150,26 +1150,6 @@ footer {
 .booking-field.error .booking-error {
   display: block;
 }
-.booking-direct {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  color: #888;
-  font-size: 0.85rem;
-  text-decoration: none;
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: color 0.2s ease;
-  margin-top: 0.25rem;
-}
-.booking-direct i {
-  color: #25d366;
-  font-size: 1rem;
-}
-.booking-direct:hover {
-  color: var(--light);
-}
 @media (max-width: 480px) {
   .booking-row {
     grid-template-columns: 1fr;
